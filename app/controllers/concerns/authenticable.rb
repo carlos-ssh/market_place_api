@@ -1,4 +1,7 @@
 module Authenticable
+  # Retreive user from Authorization token
+  # @throw [JWT::DecodeError] if toekn not valid
+  # @return [User|Nil]
   def current_user
     return @current_user if @current_user
 
