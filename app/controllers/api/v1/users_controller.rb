@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   def show
-    render json: User.find(params[:id])
+    render json: @user
   end
 
   def create
@@ -13,10 +13,22 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def update
+
+    if @user.update
+      render json: @user, status: :ok
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:email, :password)
   end
 
+  def set_user
+    @user = User.find(params[:id])
+  end
 end
