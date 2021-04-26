@@ -1,6 +1,9 @@
 require "test_helper"
 
 class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @user = users(:one)
+  end
   test 'should create user' do
     assert_difference('User.count') do
       post api_v1_users_url, params: { user: { email: 'test@test.com', password: '123123' } }, as: :json
